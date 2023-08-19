@@ -15,6 +15,7 @@ const estaEnPilotos = otrosPilotos.map(piloto=>pilotos.includes(piloto))
 
 console.log(estaEnPilotos)
 //e
+pilotos.splice(4, 1)
 pilotos.splice(1, 0, 'Perez')
 
 console.log(pilotos)
