@@ -37,20 +37,30 @@ function Tablero(){
     }
     
     this.validacion = function(){
-        //this.validarColumnas()
-        //this.validarFilas()
-        //this.validarDiagonales()
-        for(let i = 0;i<3;i++){
-            console.log("hola")
-            if(this.casillas[i][0].pieza.esCirculo == this.casillas[i][1].pieza.esCirculo && this.casillas[i][1].pieza.esCirculo == this.casillas[i][2].pieza.esCirculo){
-                console.log("Enhorabuena");
-            }
-            if(this.casillas[0][i].pieza.esCirculo == this.casillas[1][i].pieza.esCirculo && this.casillas[1][i].pieza.esCirculo == this.casillas[2][i].pieza.esCirculo){
-                console.log("Enhorabuena");
+        // Validar filas
+        for(let i = 0; i < 3; i++){
+            if(this.casillas[i * 3].pieza && this.casillas[i * 3 + 1].pieza && this.casillas[i * 3 + 2].pieza &&this.casillas[i * 3].pieza.esCirculo === this.casillas[i * 3 + 1].pieza.esCirculo && this.casillas[i * 3 + 1].pieza.esCirculo === this.casillas[i * 3 + 2].pieza.esCirculo){
+                console.log(`Felicidades gano ${this.casillas[i * 3].pieza.esCirculo ? 'Circulo' : 'Cruz'}`);
             }
         }
-    }
     
+        // Validar columnas
+        for(let i = 0; i < 3; i++){
+            if(this.casillas[i].pieza && this.casillas[i + 3].pieza && this.casillas[i + 6].pieza &&this.casillas[i].pieza.esCirculo === this.casillas[i + 3].pieza.esCirculo && this.casillas[i + 3].pieza.esCirculo === this.casillas[i + 6].pieza.esCirculo){
+                console.log(`Felicidades gano ${this.casillas[i].pieza.esCirculo ? 'Circulo' : 'Cruz'}`);
+            }
+        }
+    
+        // Validar diagonales
+        if(this.casillas[0].pieza && this.casillas[4].pieza && this.casillas[8].pieza &&this.casillas[0].pieza.esCirculo === this.casillas[4].pieza.esCirculo && this.casillas[4].pieza.esCirculo === this.casillas[8].pieza.esCirculo){
+            console.log(`Felicidades gano ${this.casillas[0].pieza.esCirculo ? 'Circulo' : 'Cruz'}`);
+        }
+        
+        if(this.casillas[2].pieza && this.casillas[4].pieza && this.casillas[6].pieza &&this.casillas[2].pieza.esCirculo === this.casillas[4].pieza.esCirculo && this.casillas[4].pieza.esCirculo === this.casillas[6].pieza.esCirculo){
+            console.log(`Felicidades gano ${this.casillas[2].pieza.esCirculo ? 'Circulo' : 'Cruz'}`);
+        }
+    }
+
     this.imprimir = function(){
         let cont = 0;
         let res = "";
@@ -68,32 +78,25 @@ function Tablero(){
 
 const tablero = new Tablero()
 
-// const casilla_1_1 = new casilla([1,1])
 
-// console.log(casilla_1_1);
 const piezaCruzUno = Object.create(piezaCircUno)
 piezaCruzUno.esCirculo = false
+const piezaCruzDos = Object.create(piezaCircUno)
+piezaCruzDos.esCirculo = false
+const piezaCruzTres = Object.create(piezaCircUno)
+piezaCruzTres.esCirculo = false
 
-// console.log(piezaCruzUno.esCirculo);
-// console.log(piezaCruzDos.esCirculo);
-// console.log(piezaCruzTres.esCirculo);
-// console.log(piezaCruzCuatro.esCirculo);
-// console.log(piezaCruzCinco.esCirculo);
-
-// console.log(piezaCircUno.esCirculo);
-// console.log(piezaCircDos.esCirculo);
-// console.log(piezaCircTres.esCirculo);
-// console.log(piezaCircCuatro.esCirculo);
-// console.log(piezaCircCinco.esCirculo);
+const piezaCircDos = Object.create(piezaCircUno)
+const piezaCircTres = Object.create(piezaCircUno)
 
 try{
     tablero.agregar(piezaCircUno,[0,0])
-    tablero.agregar(piezaCircUno,[0,1])
-    tablero.agregar(piezaCircUno,[0,2])
-    tablero.agregar(piezaCruzUno,[1,1])
+    tablero.agregar(piezaCircDos,[1,0])
+    tablero.agregar(piezaCruzUno,[2,0])
+    tablero.agregar(piezaCruzDos,[1,1])
+    tablero.agregar(piezaCruzTres,[0,2])
     tablero.imprimir()
     tablero.validacion()
-    //console.log(tablero)
 }catch(e){
     console.log(e.message)
 }
